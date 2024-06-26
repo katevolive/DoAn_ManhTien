@@ -5,9 +5,9 @@
   "author": "cipchk <cipchk@qq.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ng-alain/ng-alain.git"
+    "url": "git+https://github.com/katevolive/DoAn_ManhTien"
   },
-  "homepage": "https://minhvu1502.github.io/DoAnTotNghiep_FE/",
+  "homepage": "https://github.com/katevolive/DoAn_ManhTien",
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",

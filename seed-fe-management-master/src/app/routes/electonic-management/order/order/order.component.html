@@ -2,65 +2,42 @@
   <nz-card [nzBordered]="false">
     <nz-row>
       <nz-col nzSm="16" nzXS="24" nzMd="16" class="padding-bottom-10">
-        <button
-          nz-button
-          nzType="default"
-          (click)="btnReload.click($event)"
-          class="btn-reload"
-          *ngIf="btnReload.visible && btnReload.grandAccess"
-        >
+        <button nz-button nzType="default" (click)="btnReload.click($event)" class="btn-reload"
+          *ngIf="btnReload.visible && btnReload.grandAccess">
           <i nz-icon nzType="reload" nzTheme="outline"></i>{{ btnReload.title }}
         </button>
-        <button nz-button nzType="primary" (click)="btnAdd.click($event)" class="btn-primary" *ngIf="btnAdd.visible && btnAdd.grandAccess">
+        <button nz-button nzType="primary" (click)="btnAdd.click($event)" class="btn-primary"
+          *ngIf="btnAdd.visible && btnAdd.grandAccess">
           <i nz-icon nzType="file-add" nzTheme="fill"></i>{{ btnAdd.title }}
         </button>
-        <button
-          nz-button
-          nz-dropdown
-          [nzDropdownMenu]="menu"
-          *ngIf="btnExportExcel.visible && btnExportExcel.grandAccess"
-          class="btn-excel"
-        >
+        <button nz-button nz-dropdown [nzDropdownMenu]="menu"
+          *ngIf="btnExportExcel.visible && btnExportExcel.grandAccess" class="btn-excel">
           <i nz-icon nzType="file-excel" nzTheme="outline"></i>
           Excel<i nz-icon nzType="down"></i>
         </button>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
             <li nz-menu-item>
-              <button
-                nz-button
-                nzType="primary"
-                (click)="btnExportExcel.click($event)"
-                class="btn-excel"
-                *ngIf="btnExportExcel.visible && btnExportExcel.grandAccess"
-              >
+              <button nz-button nzType="primary" (click)="btnExportExcel.click($event)" class="btn-excel"
+                *ngIf="btnExportExcel.visible && btnExportExcel.grandAccess">
                 <i nz-icon nzType="download" nzTheme="outline"></i>{{ btnExportExcel.title }}
               </button>
             </li>
           </ul>
         </nz-dropdown-menu>
-        <button
-          nz-button
-          nzType="primary"
-          class="btn-danger"
-          (click)="btnDelete.click($event)"
-          *ngIf="btnDelete.visible && btnDelete.grandAccess"
-        >
+        <button nz-button nzType="primary" class="btn-danger" (click)="btnDelete.click($event)"
+          *ngIf="btnDelete.visible && btnDelete.grandAccess">
           <i nz-icon nzType="delete" nzTheme="fill"></i>{{ btnDelete.title }}
         </button>
       </nz-col>
       <nz-col nzSm="8" nzXS="24" nzMd="8" class="pull-right padding-bottom-10">
         <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-          <input type="text" [(ngModel)]="filter.textSearch" nz-input placeholder="Nhập từ khóa tìm kiếm" (keyup.enter)="initGridData()" />
+          <input type="text" [(ngModel)]="filter.textSearch" nz-input placeholder="Nhập từ khóa tìm kiếm"
+            (keyup.enter)="initGridData()" />
         </nz-input-group>
         <ng-template #suffixIconButton>
-          <button
-            nz-button
-            nzType="default"
-            nzSearch
-            (click)="filter.ShowAdSearch = !filter.ShowAdSearch; onResetSearch(true)"
-            title="Tìm kiếm nâng cao"
-          >
+          <button nz-button nzType="default" nzSearch
+            (click)="filter.ShowAdSearch = !filter.ShowAdSearch; onResetSearch(true)" title="Tìm kiếm nâng cao">
             <i nz-icon nzType="caret-down" nzTheme="outline" *ngIf="!filter.ShowAdSearch"></i>
             <i nz-icon nzType="caret-up" nzTheme="outline" *ngIf="filter.ShowAdSearch"></i>
           </button>
@@ -80,13 +57,8 @@
       </nz-col>
 
       <nz-col nzSm="8" nzXS="12" nzMd="8" class="padding-bottom-10">
-        <button
-          nz-button
-          nzType="primary"
-          (click)="btnSearch.click($event)"
-          class="btn-success"
-          *ngIf="btnSearch.visible && btnSearch.grandAccess"
-        >
+        <button nz-button nzType="primary" (click)="btnSearch.click($event)" class="btn-success"
+          *ngIf="btnSearch.visible && btnSearch.grandAccess">
           <i nz-icon nzType="search" nzTheme="outline"></i>{{ btnSearch.title }}
         </button>
         <!-- <button
@@ -101,58 +73,35 @@
       </nz-col>
     </nz-row>
     <nz-row>
-      <ag-grid-angular
-        #agGrid
-        style="width: 100%; height: 70vh"
-        id="unit-grid"
-        class="ag-theme-alpine"
-        [modules]="modules"
-        [columnDefs]="columnDefs"
-        [defaultColDef]="defaultColDef"
-        [suppressRowClickSelection]="true"
-        [rowSelection]="rowSelection"
-        [rowData]="grid.rowData"
-        (selectionChanged)="onSelectionChanged($event)"
-        (cellDoubleClicked)="onCellDoubleClicked($event)"
-        [overlayLoadingTemplate]="overlayLoadingTemplate"
-        [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-        [frameworkComponents]="frameworkComponents"
-        [excelStyles]="excelStyles"
-        (gridReady)="onGridReady($event)"
-      >
+      <ag-grid-angular #agGrid style="width: 100%; height: 70vh" id="unit-grid" class="ag-theme-alpine"
+        [modules]="modules" [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [suppressRowClickSelection]="true"
+        [rowSelection]="rowSelection" [rowData]="grid.rowData" (selectionChanged)="onSelectionChanged($event)"
+        (cellDoubleClicked)="onCellDoubleClicked($event)" [overlayLoadingTemplate]="overlayLoadingTemplate"
+        [overlayNoRowsTemplate]="overlayNoRowsTemplate" [frameworkComponents]="frameworkComponents"
+        [excelStyles]="excelStyles" (gridReady)="onGridReady($event)">
       </ag-grid-angular>
       <hr />
     </nz-row>
-    <app-ag-grid-pagination
-      [grid]="grid"
-      [filter]="filter"
-      [pageSizeOptions]="pageSizeOptions"
-      (pageNumberChange)="onPageNumberChange()"
-      (pageSizeChange)="onPageSizeChange()"
-    ></app-ag-grid-pagination>
+    <app-ag-grid-pagination [grid]="grid" [filter]="filter" [pageSizeOptions]="pageSizeOptions"
+      (pageNumberChange)="onPageNumberChange()" (pageSizeChange)="onPageSizeChange()"></app-ag-grid-pagination>
   </nz-card>
 </page-header-wrapper>
 
-<app-order-item
-  #itemModal
-  [isVisible]="modal.isShow"
-  [item]="modal.item"
-  [type]="modal.type"
-  [option]="modal.option"
-  (eventEmmit)="onModalEventEmmit($event)"
->
+<app-order-item #itemModal [isVisible]="modal.isShow" [item]="modal.item" [type]="modal.type" [option]="modal.option"
+  (eventEmmit)="onModalEventEmmit($event)">
 </app-order-item>
 
 <delete-modal #deleteModal [isVisible]="isShowDelete" (eventEmmit)="onDeleteEventEmmit($event)"></delete-modal>
 <div id="pdf" [hidden]="true">
   <div class="in-bao-gia-container">
     <div class="in-bao-gia-header">
-      <div class="in-bao-gia-header-left"><img width="100px" height="100px" src="../../../../../assets/img/logoxanhduong.jpg" /></div>
+      <div class="in-bao-gia-header-left"><img width="100px" height="100px"
+          src="../../../../../assets/img/logoxanhduong.jpg" /></div>
       <div class="in-bao-gia-header-right">
-        <p class="ten-cong-ty">Xanh lá Shop</p>
+        <p class="ten-cong-ty">Mạnh Tiến Shop</p>
         <p>Trụ sở chính: Hà nội</p>
         <p>Hà nội</p>
-        <p>Hotline: 0888888888 * Website: www.xanhduongshop.vn</p>
+        <p>Hotline: 0964087008 * Website: www.manhtienshop.vn</p>
       </div>
     </div>
     <div class="in-bao-gia-title">HÓA ĐƠN BÁN HÀNG</div>
@@ -190,19 +139,20 @@
         </tr>
         <!--  -->
 
-        <tr *ngFor="let prod of itemPrint ? (itemPrint.listProducts ? itemPrint.listProducts : []) : []; let i = index" valign="middle">
+        <tr *ngFor="let prod of itemPrint ? (itemPrint.listProducts ? itemPrint.listProducts : []) : []; let i = index"
+          valign="middle">
           <td>{{ i + 1 }}</td>
           <td>{{ prod.code }}</td>
           <td><img [src]="baseFile + prod.attachments[0]" align="absmiddle" width="120" /></td>
           <td colspan="2">
-            <b>{{ prod.name }}</b
-            ><br />
+            <b>{{ prod.name }}</b><br />
           </td>
           <td align="center">{{ prod.serialNumber }}</td>
           <td align="center">{{ prod.thoiGianBaoHanh + prod.loaiBaoHanh }}</td>
           <td align="center">{{ prod.count }}</td>
           <td align="center">
-            <span *ngIf="prod.discountDefault > 0" style="text-decoration: line-through">{{ prod.amoutDefault | currency: 'VND' }}</span>
+            <span *ngIf="prod.discountDefault > 0" style="text-decoration: line-through">{{ prod.amoutDefault |
+              currency: 'VND' }}</span>
             <br /><span> {{ prod.amoutDefault - prod.discountDefault | currency: 'VND' }}</span>
           </td>
           <!--<td align="center"><br />
@@ -242,7 +192,8 @@
     </div> -->
     <div class="in-bao-gia-footer">
       <p>
-        <i class="fas fa-exclamation-circle"></i> Quý khách lưu ý: Giá bán, khuyến mại của sản phẩm và tình trạng còn hàng có thể bị thay
+        <i class="fas fa-exclamation-circle"></i> Quý khách lưu ý: Giá bán, khuyến mại của sản phẩm và tình trạng còn
+        hàng có thể bị thay
         đổi bất cứ lúc nào mà không kịp báo trước.
       </p>
     </div>
@@ -250,7 +201,7 @@
       <p>Để biết thêm chi tiết, vui lòng liên hệ:</p>
       <p>Hotline: 0888888888 (8h00-21h30 hàng ngày)</p>
       <p>Email: <a href="mailto:abc@gmail.com">abc@gmail.com</a></p>
-      <p>Xanh lá Shop CHÂN THÀNH CẢM ƠN QUÝ KHÁCH HÀNG!</p>
+      <p>Mạnh Tiến Shop CHÂN THÀNH CẢM ƠN QUÝ KHÁCH HÀNG!</p>
     </div>
   </div>
 </div>
