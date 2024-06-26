@@ -1,0 +1,359 @@
+<main class="main">
+
+	<div class="intro-section pt-3 pb-3 mb-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<nz-carousel style="height: 399.297px;" nzAutoPlay>
+						<div nz-carousel-content [ngStyle]="{'background-image': item.url, 'background-repeat': 'no-repeat', 'background-size':'cover'}" *ngFor="let item of array">
+						</div>
+					  </nz-carousel>
+				</div><!-- End .col-lg-8 -->
+			</div><!-- End .row -->
+		</div><!-- End .container -->
+	</div><!-- End .intro-section -->
+
+	<div class="container featured">
+		<ul class="nav nav-pills nav-border-anim nav-big justify-content-center mb-3" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" (click)="switchListProduct(0)" id="products-featured-link" data-toggle="tab" href="#products-featured-tab" role="tab" aria-controls="products-featured-tab" aria-selected="true">Đặc sắc</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" (click)="switchListProduct(6)" id="products-sale-link" data-toggle="tab" href="#products-sale-tab" role="tab" aria-controls="products-sale-tab" aria-selected="false">Giảm giá</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" (click)="switchListProduct(4)" id="products-top-link" data-toggle="tab" href="#products-top-tab" role="tab" aria-controls="products-top-tab" aria-selected="false">Xếp hạng cao nhất</a>
+			</li>
+		</ul>
+
+		<div class="tab-content tab-content-carousel">
+			<div class="tab-pane p-0 fade show active" id="products-featured-tab" role="tabpanel" aria-labelledby="products-featured-link">
+				<div class="row">
+					<div *ngFor="let item of listProduct" class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3">
+						<div class="product product-7 text-center">
+							<figure class="product-media">
+								<span class="product-label label-new">New</span>
+								<a (click)="viewDetail(item.id)"  href="javascript:void(0)"  >
+									<img [src]="item.urlImageActive" alt="Product image" class="product-image">
+								</a>
+		
+								<!-- <div class="product-action-vertical">
+									<a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Xem nhanh</span></a>
+									<a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So sánh</span></a>
+								</div> -->
+								<!-- End .product-action-vertical -->
+		
+								<div class="product-action">
+									<a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
+								</div><!-- End .product-action -->
+							</figure><!-- End .product-media -->
+		
+							<div class="product-body">
+								<div class="product-cat">
+									<a href="#">{{item.categoryString}}</a>
+								</div><!-- End .product-cat -->
+								<h3 class="product-title"><a (click)="viewDetail(item.id)"  href="javascript:void(0)">{{item.name}}</a></h3><!-- End .product-title -->
+								<p class="product-old-price" *ngIf="item.discountDefault > 0">
+									{{item.amoutDefault | currency: 'VND'}}
+								</p>
+								<div class="product-price">
+									{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
+								</div><!-- End .product-price -->
+								<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
+								
+								<div class="product-nav product-nav-thumbs">
+									<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
+										<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">
+									</a>
+								</div><!-- End .product-nav -->
+							</div><!-- End .product-body -->
+						</div><!-- End .product -->
+					</div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+					<div nz-col class="item-center" [nzXl]="24" nzMd="24" nzSm="24" nzXs="24">
+						<nz-pagination (click)="changePageIndex(pageIndex)" [(nzPageIndex)]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount" nzSimple="true"></nz-pagination>
+					  </div>
+				</div><!-- End .owl-carousel -->
+			</div><!-- .End .tab-pane -->
+			<div class="tab-pane p-0 fade" id="products-sale-tab" role="tabpanel" aria-labelledby="products-sale-link">
+				<div class="row">
+					<div *ngFor="let item of listProduct" class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3">
+						<div class="product product-7 text-center">
+							<figure class="product-media">
+								<span *ngIf="item.discountDefault > 0" class="product-label label-discount">{{item.precentDiscount}}%</span>
+								<a href="product.html">
+									<img [src]="item.urlImageActive" alt="Product image" class="product-image">
+								</a>
+<!-- 		
+								<div class="product-action-vertical">
+									<a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Xem nhanh</span></a>
+									<a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So sánh</span></a>
+								</div> -->
+								<!-- End .product-action-vertical -->
+		
+								<div class="product-action">
+									<a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
+								</div><!-- End .product-action -->
+							</figure><!-- End .product-media -->
+		
+							<div class="product-body">
+								<div class="product-cat">
+									<a href="#">{{item.categoryString}}</a>
+								</div><!-- End .product-cat -->
+								<h3 class="product-title"><a (click)="viewDetail(item.id)"  href="javascript:void(0)">{{item.name}}</a></h3><!-- End .product-title -->
+								<p class="product-old-price" *ngIf="item.discountDefault > 0">
+									{{item.amoutDefault | currency: 'VND'}}
+								</p>
+								<div class="product-price">
+									{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
+								</div><!-- End .product-price -->
+								<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
+								
+								<div class="product-nav product-nav-thumbs">
+									<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
+										<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">
+									</a>
+								</div><!-- End .product-nav -->
+							</div><!-- End .product-body -->
+						</div><!-- End .product -->
+					</div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+					<div nz-col class="item-center" [nzXl]="24" nzMd="24" nzSm="24" nzXs="24">
+						<nz-pagination (click)="changePageIndex(pageIndex)" [(nzPageIndex)]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount" nzSimple="true"></nz-pagination>
+					  </div>
+				</div><!-- End .owl-carousel -->
+			</div><!-- .End .tab-pane -->
+			<div class="tab-pane p-0 fade" id="products-top-tab" role="tabpanel" aria-labelledby="products-top-link">
+				<div class="row">
+					<div *ngFor="let item of listProduct" class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3">
+						<div class="product product-7 text-center">
+							<figure class="product-media">
+								<span class="product-label label-new">New</span>
+								<a (click)="viewDetail(item.id)"  href="javascript:void(0)"  >
+
+									<img [src]="item.urlImageActive" alt="Product image" class="product-image">
+								</a>
+		
+								<!-- <div class="product-action-vertical">
+									<a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Xem nhanh</span></a>
+									<a href="#" class="btn-product-icon btn-compare" title="Compare"><span>So sánh</span></a>
+								</div> -->
+								<!-- End .product-action-vertical -->
+		
+								<div class="product-action">
+									<a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
+								</div><!-- End .product-action -->
+							</figure><!-- End .product-media -->
+		
+							<div class="product-body">
+								<div class="product-cat">
+									<a href="#">{{item.categoryString}}</a>
+								</div><!-- End .product-cat -->
+								<h3 class="product-title"><a (click)="viewDetail(item.id)"  href="javascript:void(0)">{{item.name}}</a></h3><!-- End .product-title -->
+								<p class="product-old-price" *ngIf="item.discountDefault > 0">
+									{{item.amoutDefault | currency: 'VND'}}
+								</p>
+								<div class="product-price">
+									{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
+								</div><!-- End .product-price -->
+								<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
+								
+								<div class="product-nav product-nav-thumbs">
+									<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
+										<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">
+									</a>
+								</div><!-- End .product-nav -->
+							</div><!-- End .product-body -->
+						</div><!-- End .product -->
+					</div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+					<div nz-col class="item-center" [nzXl]="24" nzMd="24" nzSm="24" nzXs="24">
+						<nz-pagination (click)="changePageIndex(pageIndex)" [(nzPageIndex)]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount" nzSimple="true"></nz-pagination>
+					  </div>
+				</div><!-- End .owl-carousel -->
+			</div><!-- .End .tab-pane -->
+		</div><!-- End .tab-content -->
+	</div><!-- End .container -->
+
+	<div class="mb-7 mb-lg-11"></div><!-- End .mb-7 -->
+	<div class="container">
+		<section id="home-collection">
+			<div class="wrapper">
+				<div class="inner">
+					<div class="grid small--hide large--show medium--show row">
+						<div class="col-3 grid__item large--one-quarter medium--one-half small--one-whole">
+							<div class="collection-item fix-height" style="height: 551px;">
+								<div class="image">
+									<a href="https://xanhla.vn/collections/hat-banh-dinh-duong">
+										<img src="//theme.hstatic.net/200000069234/1000823571/14/img_collection_1.png?v=74">
+									</a>
+								</div>
+								<div class="des">
+									<ul>
+		<li>100% hạt, rau củ quả tự nhiên đạt chuẩn Vietgap/hữu cơ/được trồng theo hướng giảm thiểu/không hóa chất.</li>
+		<li>Hạt/trái cây nhập khẩu có xuất xứ minh bạch, rõ ràng.</li>
+		</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-3 grid__item large--one-quarter medium--one-half small--one-whole">
+							<div class="collection-item fix-height" style="height: 551px;">
+								<div class="image">
+									<a href="https://xanhla.vn/collections/sua-hat-nuoc-ep-sinh-to">
+										<img src="//theme.hstatic.net/200000069234/1000823571/14/img_collection_2.png?v=74">
+									</a>
+								</div>
+								<div class="des">
+									<ul>
+		<li>Sản xuất trong ngày, đảm bảo tính tươi mới.</li>
+		<li>Không chất phụ gia. Không chất bảo quản. Không hương liệu nhân tạo.</li>
+		<li>Quy trình nghiêm ngặt đạt&nbsp;tiêu chuẩn VSATTP,&nbsp;ngăn chặn&nbsp;các mối nguy hại, đảm bảo vệ sinh, chất lượng và tiêu chuẩn trong từng sản phẩm.</li>
+		</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-3 grid__item large--one-quarter medium--one-half small--one-whole">
+							<div class="collection-item fix-height" style="height: 551px;">
+								<div class="image">
+									<a href="https://xanhla.vn/collections/dang-ky-lieu-trinh">
+										<img src="//theme.hstatic.net/200000069234/1000823571/14/img_collection_3.png?v=74">
+									</a>
+								</div>
+								<div class="des">
+									<ul>
+		<li>Đa dạng các liệu trình dinh dưỡng theo từng nhu cầu cụ thể, chuyên biệt.</li>
+		<li>Cung cấp đầy đủ và phong phú protein, chất xơ, axit béo, omega, vitamins và các khoáng chất cùng các enzymes sống thiết yếu cho cơ thể.</li>
+		<li>Xây dựng lối sống lành mạnh, cơ thể khỏe - đẹp hơn. Hỗ trợ ngăn ngừa các bệnh về ung thư, tiểu đường, mỡ máu, tim mạch, huyết áp….</li>
+		</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-3 grid__item large--one-quarter medium--one-half small--one-whole">
+							<div class="collection-item fix-height" style="height: 551px;">
+								<div class="image">
+									<a href="https://xanhla.vn/pages/cua-hang">
+										<img src="//theme.hstatic.net/200000069234/1000823571/14/img_collection_4.png?v=74">
+									</a>
+								</div>
+								<div class="des">
+									<ul>
+		<li>Giao hàng tận nơi. Hỗ trợ giao nhanh trong 1-2 giờ (với đơn nội thành Hà Nội).</li>
+		<li>Đội ngũ tư vấn có chuyên môn, phản hồi nhanh chóng, hỗ trợ theo sát suốt quá trình sử dụng.</li>
+		<li>Bao bì an toàn cho sức khỏe, thân thiện môi trường. Giảm tối đa đồ nhựa sử dụng một lần, hạn chế sự phát thải.</li>
+		</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div *ngFor="let cate of listCategory" class="container featured">
+		<br>
+		<div class="cta cta-border cta-border-image mb-5 mb-lg-7" style="background-image: url(assets/images/demos/demo-3/bg-1.jpg);"></div>
+		<div>
+			<h3>{{cate.title}}</h3>
+		</div>
+		<div class="row">
+			<div *ngFor="let item of cate.products" class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3">
+				<div class="product product-7 text-center">
+					<figure class="product-media">
+						<span class="product-label label-new">New</span>
+						<a href="javascript:;" (click)="viewDetail(item.id)">
+							<img [src]="item.urlImageActive" alt="Product image" class="product-image">
+						</a>
+
+
+						<div class="product-action">
+							<a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
+						</div><!-- End .product-action -->
+					</figure><!-- End .product-media -->
+
+					<div class="product-body">
+						<div class="product-cat">
+							<a href="#">{{item.categoryString}}</a>
+						</div><!-- End .product-cat -->
+						<h3 class="product-title"><a (click)="viewDetail(item.id)"  href="javascript:void(0)">{{item.name}}</a></h3><!-- End .product-title -->
+						<p class="product-old-price" *ngIf="item.discountDefault > 0">
+							{{item.amoutDefault | currency: 'VND'}}
+						</p>
+						<div class="product-price">
+							{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
+						</div><!-- End .product-price -->
+						<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
+						
+						<div class="product-nav product-nav-thumbs">
+							<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
+								<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">
+							</a>
+						</div><!-- End .product-nav -->
+					</div><!-- End .product-body -->
+				</div><!-- End .product -->
+			</div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+			<div nz-col class="item-center" [nzXl]="24" nzMd="24" nzSm="24" nzXs="24">
+				<nz-pagination *ngIf="cate.products.length > 0" (click)="changePageIndex(pageIndex)" [(nzPageIndex)]="pageIndex" [nzPageSize]="pageSize" [nzTotal]="totalCount" nzSimple="true"></nz-pagination>
+			  </div>
+		</div><!-- End .owl-carousel -->
+	</div><!-- End .container -->
+
+	<div class="container">
+		<hr class="mt-5 mb-0">
+	</div><!-- End .container -->
+
+	<div class="icon-boxes-container mt-2 mb-2 bg-transparent">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3">
+					<div class="icon-box icon-box-side">
+						<span class="icon-box-icon text-dark">
+							<i class="icon-rocket"></i>
+						</span>
+						<div class="icon-box-content">
+							<h3 class="icon-box-title">Miễn phí vận chuyển</h3><!-- End .icon-box-title -->
+							<p>Đơn hàng 50k trở lên</p>
+						</div><!-- End .icon-box-content -->
+					</div><!-- End .icon-box -->
+				</div><!-- End .col-sm-6 col-lg-3 -->
+
+				<div class="col-sm-6 col-lg-3">
+					<div class="icon-box icon-box-side">
+						<span class="icon-box-icon text-dark">
+							<i class="icon-rotate-left"></i>
+						</span>
+
+						<div class="icon-box-content">
+							<h3 class="icon-box-title">Miễn phí đổi trả</h3><!-- End .icon-box-title -->
+							<p>Trong vòng 30 ngày</p>
+						</div><!-- End .icon-box-content -->
+					</div><!-- End .icon-box -->
+				</div><!-- End .col-sm-6 col-lg-3 -->
+
+				<div class="col-sm-6 col-lg-3">
+					<div class="icon-box icon-box-side">
+						<span class="icon-box-icon text-dark">
+							<i class="icon-info-circle"></i>
+						</span>
+
+						<div class="icon-box-content">
+							<h3 class="icon-box-title">Giảm giá ngay</h3><!-- End .icon-box-title -->
+							<p>khi đăng ký tài khoản</p>
+						</div><!-- End .icon-box-content -->
+					</div><!-- End .icon-box -->
+				</div><!-- End .col-sm-6 col-lg-3 -->
+
+				<div class="col-sm-6 col-lg-3">
+					<div class="icon-box icon-box-side">
+						<span class="icon-box-icon text-dark">
+							<i class="icon-life-ring"></i>
+						</span>
+
+						<div class="icon-box-content">
+							<h3 class="icon-box-title">Hỗ trợ</h3><!-- End .icon-box-title -->
+							<p>24/7</p>
+						</div><!-- End .icon-box-content -->
+					</div><!-- End .icon-box -->
+				</div><!-- End .col-sm-6 col-lg-3 -->
+			</div><!-- End .row -->
+		</div><!-- End .container -->
+	</div><!-- End .icon-boxes-container -->
+
+</main><!-- End .main -->

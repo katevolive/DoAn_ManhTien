@@ -1,0 +1,649 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Mukesh Murugan</Authors>
+    <Company>codewithmukesh</Company>
+    <RepositoryUrl>https://github.com/iammukeshm/CleanArchitecture.WebApi</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
+    <PackageProjectUrl>https://www.codewithmukesh.com/blog/aspnet-core-webapi-clean-architecture/</PackageProjectUrl>
+    <Version>1.1.0</Version>
+	<LangVersion>latest</LangVersion>
+	<UserSecretsId>53487c33-247b-439f-a011-6acbc4db200c</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Application.WebApi.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\**" />
+    <Content Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\242356548_240643838069520_6216866374648875934_n.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Dấu Mavin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.17" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.5.1" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
+    <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.7" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Infrastructure.Shared\Infrastructure.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Application.WebApi.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\Chi-tiet-KHTH-DP-0-Kỳ-0-0-01-12-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\Chi-tiet-KHTH-TW-2025-Kỳ-2021-2025-18-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\Chi-tiet-KHTH-TW-2030-Kỳ-2026-2030-01-12-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSDP_0_KY_0_0-06122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSDP_0_KY_0_0-22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSDP_2025_KY_2021_2025-22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSDP_2036_KY_2036_2040-22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSDP_2037_KY_2036_2040-22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSTW_2021_KY_2021_2025-21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSTW_2021_KY_2021_2025-23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSTW_2025_KY_2021_2025-22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSTW_2027_KY_2026_2030-21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSTW_2051_KY_2051_2055-21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSTW_2069_KY_2066_2070-22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\CHI_TIET_KHTHNSTW_2070_KY_2066_2070-22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\Danh sách dự án 29112021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\Danh sách dự án 30112021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\Danh sách nhiệm vụ 29112021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\DanhSachHoSoLuuKho_02122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\DanhSachNhiemVu_01122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ExportKeHoachHangNamNSDP_2026_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ExportKeHoachHangNamNSTW_0_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ExportKeHoachHangNamNSTW_2026_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ExportKeHoachHangNamNSTW_2026_28122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\GiaiNganHangNamNSDP_NAM_2021_KY_2021_28122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\GiaiNganHangNamNSDP_NAM_2025_KY_2025_28122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\GiaiNganHangNamNSTW_NAM_2031_KY_2031-29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\GN_HN_NSTW-0-25-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\GN_HN_NSTW_NAM_2026_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\GN_HN_NSĐP-2025-25-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\GN_HN_NSĐP_NAM_2022-21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSDP_2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSDP_2030_12122030.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSDP_2056.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSDP_2_12122030.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSTW_2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSTW_2021_06012021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSTW_2026.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\ImportKeHoachHangNamNSTW_2029.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhHangNamNSDP2021-Kỳ-2021-30-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP2025-Kỳ-2021-2025-02-12-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP2025-Kỳ-2021-2025-19-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP2025-Kỳ-2021-2025-22-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP2056-Kỳ-2056-2060-03-12-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP2060-Kỳ-2056-2060-03-12-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2021_KY_2021_2025_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2021_KY_2021_2025_27122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2021_KY_2021_2025_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2022_KY_2021_2025_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2022_KY_2021_2025_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2023_KY_2021_2025_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2024_KY_2021_2025_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2026_KY_2026_2030_27122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2026_KY_2026_2030_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2027_KY_2026_2030_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2028_KY_2026_2030_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2031_KY_2031_2035_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2032_KY_2031_2035_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSDP_2036_KY_2036_2040_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2021_KY_2021_2025_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2021_KY_2021_2025_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2021_KY_2021_2025_27122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2022_KY_2021_2025_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2023_KY_2021_2025_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2023_KY_2021_2025_29122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2024_KY_2021_2025_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2026_KY_2026_2030_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2026_KY_2026_2030_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2027_KY_2026_2030_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2028_KY_2026_2030_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2029_KY_2026_2030_23122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2031_KY_2031_2035_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2032_KY_2031_2035_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2033_KY_2031_2035_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2034_KY_2031_2035_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2035_KY_2031_2035_22122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2036_KY_2036_2040_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2037_KY_2036_2040_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2038_KY_2036_2040_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2039_KY_2036_2040_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2040_KY_2036_2040_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KhTrungHanNSTW2061_KY_2061_2065_21122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_GN_TINH_GIAO_HUYEN-2021-Kỳ-2021-23-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_GN_TINH_GIAO_HUYEN-Nam-2021-23-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_GN_TINH_GIAO_HUYEN-Nam-2021-25-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_HN_NSTW-0-24-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_HN_NSTW-0-25-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_HN_NSTW-2027-26-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_HN_NSTW-2061-25-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_HN_NSĐP0-24-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_HN_NSĐP2025-24-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_NS_VON_HUYEN-Nam-2021-14122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_NS_VON_HUYEN-Nam-2021-24-11-2021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\KH_NS_VON_HUYEN-Nam-2022-15122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\MinhNT_Document.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\templateImportDuAn.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\templateImportNhiemVu.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\ExportData\Tiendothuchien_06122021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\BaoCaoHangNam_NSDP.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\BaoCaoHangNam_NSTW.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\BaoCaoTrungHan_NSDP_ver0.2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\BaoCaoTrungHan_NSTW_ver0.2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKhHangNam\GN_HN_NSDP.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKhHangNam\GN_HN_NSTW.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKhHangNam\KH_HN_NSDP.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKhHangNam\KH_HN_NSTW.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermDetailLocalN0.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermDetailLocalN1.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermDetailLocalN2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermDetailLocalN3.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermDetailLocalN4.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermGovDetailN0.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermGovDetailN1.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermGovDetailN2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermGovDetailN3.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportKHTH\ExportMidiumTermGovDetailN4.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermGovN0.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermGovN1.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermGovN2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermGovN3.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermGovN4.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermN0.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermN1.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermN2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermN3.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportMidiumTermN4.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportTinhGiaoHuyen\KH_GN_TINH_GIAO_HUYEN.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportTinhGiaoHuyen\KH_NS_VON_HUYEN.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportTinhGiaoHuyen\KH_NS_VON_HUYEN_V2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\ExportTinhGiaoHuyen\Kế hoạch và giải ngân vốn huyện %282%29.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\Export_HSLUKHO_template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\Export_HSNB_Template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\KHHN\GiaiNganKhHangNamNSDP.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\KHHN\GN_KHHN_NSDP_import_template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\KHHN\GN_KHHN_NSTW_import_template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\KHHN\KHHN_NSDP_import_template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\KHHN\KHHN_NSTW_import_template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\Kế_hoạch_trung_hạn_NSDP_import_template_ver0_1_19102021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\Kế_hoạch_trung_hạn_NSĐP_import_template_ver0_1_19102021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\TemplateImportDuAn.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\TemplateImportDuAnBak.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\TemplateImportDuAn_ver0.2_25112021.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\TemplateImportNhiemVu.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\TemplateImportNhiemVu_ver0.2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Export\Template\Tiendothuchien_Export_template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\235551563_404625497691993_6608251223844445260_n.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\258533689_2946404065572342_3341866090049027277_n.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\258765295_197555339215860_864895583555596075_n.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\259313299_1061455751331814_1198949758397643465_n.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\4c10005caa495d170458_2f3ee6f4a02a4c0fb0bdf20329a4e08b_grande.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\4c10005caa495d170458_dc92eb01ab6f40a5b5d7b8bb7812e48e_compact.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\4c10005caa495d170458_dc92eb01ab6f40a5b5d7b8bb7812e48e_small.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Back gound-k58.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\black_final_1_3.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\D326783E-2278-4E98-8677-732E5C210BCAJ04U8.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Dấu chức danh.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\green-pumpkin-seeds-container-concrete_0505ed1c33264e7493aeb91138ced2fa_small.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\hat_bi_1_e6538f711c74452bab7c14bd97474405_small.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\hat_bi_xanh_036494a4dac84d7da8f137b875477c78_master.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\img_0065_8487beed7e41424b89b0803c3d5d9415_small.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\img_0065_e0ecaaa0bf134e659ccf909633172e61_grande.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\iphone-13-pro-max-1-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\iphone-13-pro-max-2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\iphone-13-pro-max-3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\iphone-13-pro-max-xanh-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\iphone-13-pro-max-xanh-2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\mix3_macca_oc_cho_hanh_nhan_a15199cc0e5d4345aaba96d2fd30348f_large.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\mix3_macca_oc_dieu_186895c2c5cd45e785c11a715836a13f_large.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\nanh_bd8803f7281d450eaeb3b292e9009909_large.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\note_20_ultra_1_8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\oppo-reno7-z-1-3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\oppo-reno7-z-2-3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\oppo-reno7-z-3-3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\oppo-reno7-z-note-3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Samsung-Galaxy-Note-20-Ultra-5G.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\samsung-galaxy-s21-ultra-0023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\samsung-galaxy-s21-ultra-5G-slider-780x433.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\samsung-galaxy-s21-ultra-bac-600x600-1-200x200.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\samsung-galaxy-s21-ultra-note-2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\samsung_galaxy_note2020_ultra_6.9_civilian_olv.00_std_pt01.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\scb.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\sm-n985_986_galaxynote20ultra_front_pen_mysticwhite_200529.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\snack_rong_bien_1db42b09a29c431fbd6ce52056c3d80e_large.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\xiaomi-redmi-note-11-pro-4g-15.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\xiaomi-redmi-note-11-pro-4g-2-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\xiaomi-redmi-note-11-pro-4g-4-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\xiaomi-redmi-note-11-pro-4g-note-1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\yellow_final_2%281%29.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\yellow_final_2.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\yellow_final_3.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>
