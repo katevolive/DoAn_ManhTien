@@ -67,10 +67,10 @@ export class LoginPageComponent implements OnInit {
       }
       var data = res.data.userModel;
       this.isLoginErr = false;
-      const isUser =
-        data?.listRoles === null || data?.listRoles === undefined
+      const isUser = data?.listRoles === null || data?.listRoles === undefined
           ? false
-          : data?.listRoles.includes(ROLE_USER);
+          : true;
+          // : data?.listRoles.includes(ROLE_USER);
       if (isUser) {
         var model = {
           id: res.data.userModel.id,

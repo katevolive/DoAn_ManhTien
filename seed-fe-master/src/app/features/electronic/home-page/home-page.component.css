@@ -40,7 +40,8 @@
   }
   .product-image{
       width: 277px;
-      height: 277px;
+      height: 210px;
+      background-color: #fff;
   }
   .product-desc{
       width: 40px;

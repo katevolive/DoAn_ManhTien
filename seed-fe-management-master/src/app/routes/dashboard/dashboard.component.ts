@@ -108,6 +108,7 @@ export class DashboardComponent {
     this.dashboardService.getAll().subscribe((res) => {
       if (res) {
         const rs = res.orderReport;
+        debugger
         this.orderCount = rs.orderReceived;
         this.orderCountRecived = rs.orderDelivered;
         this.orderRevoked = rs.orderCancelled;

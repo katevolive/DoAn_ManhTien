@@ -19,6 +19,8 @@ export class HomePageComponent implements OnInit {
     url:'url(../../../../assets/images/xanhla/ms_banner_img3.jpg)'
   },{
     url:'url(../../../../assets/images/xanhla/ms_banner_img4.jpg)'
+  },{
+    url:'url(../../../../assets/images/xanhla/banner-nuocGk.jpg)'
   }];
   snapshot: RouterStateSnapshot;
   listSupplier: any[] = [];
