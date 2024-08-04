@@ -20,6 +20,8 @@ declare var $: any;
 export class LoginPageComponent implements OnInit {
   formLogin: FormGroup;
   formSignUp: FormGroup;
+  formForgotPassword: FormGroup;
+  
   isLoginErr = false;
   isSignupErr = false;
   isSignupSuccess = false;
@@ -45,6 +47,9 @@ export class LoginPageComponent implements OnInit {
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
     });
+    this.formForgotPassword = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
   }
   get userName(): AbstractControl {
     return this.formLogin.controls.username;
@@ -69,8 +74,8 @@ export class LoginPageComponent implements OnInit {
       this.isLoginErr = false;
       const isUser = data?.listRoles === null || data?.listRoles === undefined
           ? false
-          : true;
-          // : data?.listRoles.includes(ROLE_USER);
+          // : true;
+          : data?.listRoles.includes(ROLE_USER);
       if (isUser) {
         var model = {
           id: res.data.userModel.id,
@@ -117,8 +122,8 @@ export class LoginPageComponent implements OnInit {
     this.accountService.register(model).subscribe(
       (res) => {
         if (res.code !== 200) {
-          this.isSignupErr = true;
           this.errorMsg = res.message;
+          this.isSignupErr = true;
           return
         }
         if (res.code === 200) {
@@ -140,5 +145,52 @@ export class LoginPageComponent implements OnInit {
         this.nzMessage.error(err.error.message);
       },
     );
+  }
+  forgotPassword() {
+    if (this.formForgotPassword.valid) {
+      const email = this.formForgotPassword.value.email;
+      let model = {
+        email: email,
+      };
+      this.accountService.forgotPassword(model).subscribe(
+        (res) => {
+          if (res.code !== 200) {
+            this.isSignupErr = true;
+            this.errorMsg = res.message;
+            return
+          }
+          if (res.code === 200) {
+            this.isSignupErr = false;
+            this.isSignupSuccess = true;
+            this.errorMsg = 'Mật khẩu đã được gửi qua email của bạn!';
+            setTimeout(() => {
+              this.isSignupSuccess = false;
+            }, 5000);
+          }
+        },
+        (err) => {
+          this.nzMessage.error(err.error.message);
+        },
+      );
+    }else{
+      this.errorMsg = 'Kiểm tra thông tin các trường đã nhập';
+      this.isSignupErr = true;
+      return;
+    }
+  }
+  showForgotPassword() {
+    const signInTab = document.getElementById('signin-tab');
+    const forgotTab = document.getElementById('forgot-tab');
+    if (signInTab && forgotTab) {
+      signInTab.classList.remove('active');
+      forgotTab.classList.add('active');
+    }
+
+    const signInPane = document.getElementById('signin');
+    const forgotPane = document.getElementById('forgot');
+    if (signInPane && forgotPane) {
+      signInPane.classList.remove('show', 'active');
+      forgotPane.classList.add('show', 'active');
+    }
   }
 }

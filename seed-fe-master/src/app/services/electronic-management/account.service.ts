@@ -21,4 +21,7 @@ export class AccountService {
   register(model: any): Observable<any> {
     return this.http.post(environment.BASE_API_URL + customerRouter.register, model);
   }
+  forgotPassword(model: any): Observable<any> {
+    return this.http.post(environment.BASE_API_URL + customerRouter.forgotPassword, model);
+  }
 }

@@ -28,6 +28,6 @@ namespace Infrastructure.Persistence.Businesses.Account
         /// </summary>
         /// <param name="email"></param>
         /// <returns>Password User</returns>
-        Task<Response> FogotPassword(string email);
+        Task<Response> FogotPassword(UserModel model);
     }
 }

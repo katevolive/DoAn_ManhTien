@@ -115,10 +115,10 @@ namespace WebApi.Controllers
         /// <param name="email">Thông tin người dùng cần cập nhật mật khẩu</param>
         /// <returns>Id người dùng đã cập nhật thành công</returns> 
         /// <response code="200">Thành công</response>
-        [AllowAnonymous, HttpGet, Route("forgot-password")]
-        public async Task<Response> ForgotPassword([FromQuery] string email)
+        [AllowAnonymous, HttpPost, Route("forgot-password")]
+        public async Task<Response> ForgotPassword([FromBody] UserModel model)
         {
-            var result = await _accountHandler.FogotPassword(email);
+            var result = await _accountHandler.FogotPassword(model);
 
             return result;
         }

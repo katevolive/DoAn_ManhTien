@@ -30,7 +30,7 @@
             <returns>Id người dùng đã cập nhật thành công</returns> 
             <response code="200">Thành công</response>
         </member>
-        <member name="M:WebApi.Controllers.AccountController.ForgotPassword(System.String)">
+        <member name="M:WebApi.Controllers.AccountController.ForgotPassword(Infrastructure.Persistence.Businesses.Account.UserModel)">
             <summary>
             Lấy lại mật khẩu người dùng
             </summary> 

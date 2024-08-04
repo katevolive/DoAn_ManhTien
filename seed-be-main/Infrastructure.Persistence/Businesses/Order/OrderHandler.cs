@@ -71,7 +71,7 @@ namespace Infrastructure.Persistence.Businesses.Order
                 }
                 #region Gửi email thông báo đến khách hàng
 
-                string title = "[Molla - Mobile] - Đặt hàng thành công";
+                string title = "[Mạnh - Shop] - Đặt hàng thành công";
 
 
                 StringBuilder htmlBody = new StringBuilder();

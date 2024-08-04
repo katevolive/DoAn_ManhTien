@@ -229,11 +229,11 @@ namespace Infrastructure.Persistence.Businesses.Account
             }
         }
 
-        public async Task<Response> FogotPassword(string email)
+        public async Task<Response> FogotPassword(UserModel model)
         {
             try
             {
-                var userModel = _dataContext.Users.FirstOrDefault(x => x.Email.Equals(email));
+                var userModel = _dataContext.Users.FirstOrDefault(x => x.Email.Equals(model.Email));
                 if (userModel == null)
                 {
                     return new ResponseObject<string>(null, "Email không tồn tại trong hệ thống!", Code.ServerError);
@@ -245,44 +245,46 @@ namespace Infrastructure.Persistence.Businesses.Account
                 var dbSave = await _dataContext.SaveChangesAsync();
                 if (dbSave >= 1)
                 {
-                    #region Gửi email thông báo đến khách hàng
-
-                    string title = "[Molla - Mobile] - Lấy lại mật khẩu thành công";
-
+                    // Gửi email thông báo đến khách hàng
+                    string title = "[Mạnh - Shop] - Lấy lại mật khẩu thành công";
 
                     StringBuilder htmlBody = new StringBuilder();
                     htmlBody.Append("<html><body>");
                     htmlBody.Append("<p>Xin chào <b>" + userModel.Name + "</b>,</p>");
                     htmlBody.Append("<p>Bạn đã lấy lại mật khẩu thành công. Bạn hãy truy cập vào trang web để thay đổi mật khẩu.</p>");
                     htmlBody.Append("<p>Mật khẩu mới của bạn là: <b>" + newPassword + "</b></p>");
-                    htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa - laptop'></span> <p>Molla<strong> Mobile</strong> <span>Thế giới máy tính<span></p> </a> </p>");
+                    htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa-laptop'></span> <p>Molla<strong> Mobile</strong> <span>Thế giới máy tính</span></p></a></p>");
                     htmlBody.Append("</body></html>");
 
                     var emailModel = new EmailRequest()
                     {
+                        From = "chuyenvienguimail@gmail.com",
                         To = userModel.Email,
                         Subject = title,
                         Body = htmlBody.ToString()
                     };
+
                     try
                     {
-                        _ = Task.Factory.StartNew(() => { _emailService.SendAsync(emailModel); });
+                        await _emailService.SendAsync(emailModel);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        // ignored
+                        Log.Error(ex, "Lỗi khi gửi email");
+                        return new ResponseObject<string>(null, "Gửi email không thành công!", Code.ServerError);
                     }
-                    #endregion
+
                     return new ResponseObject<string>(null, "Lấy mật khẩu thành công!", Code.Success);
                 }
                 return new ResponseObject<string>(null, "Lấy mật khẩu thất bại!", Code.ServerError);
             }
             catch (Exception ex)
             {
-                Log.Error(ex, MessageConstants.ErrorLogMessage);
+                Log.Error(ex, "Lỗi trong quá trình lấy lại mật khẩu");
                 return new ResponseError(Code.ServerError, $"{MessageConstants.GetDataErrorMessage} - {ex.Message}");
             }
         }
+
 
         public async Task<Response> Create(UserModel model)
         {
@@ -322,7 +324,7 @@ namespace Infrastructure.Persistence.Businesses.Account
                 {
                     #region Gửi email thông báo đến khách hàng
 
-                    string title = "[Molla - Mobile] - Đăng ký tài khoản thành công";
+                    string title = "[Mạnh - Shop] - Đăng ký tài khoản thành công";
 
 
                     StringBuilder htmlBody = new StringBuilder();
