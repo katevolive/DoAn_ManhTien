@@ -115,13 +115,14 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     return listRs;
   }
-  
+  listProductMetas:any
   fetchProductByCode(code: string) {
     if (code) {
       this.prodService.getById(code).subscribe(
         (res) => {
           this.isLoading = false;
           this.itemQuickView = res.data;
+          this.listProductMetas = res.data.productMetas;
           this.itemQuickView.count = 1;
           if (this.itemQuickView.discountDefault === 0) {
             this.itemQuickView.isShow = false;
@@ -217,7 +218,13 @@ export class ProductDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   addToCart(item: any) {
     console.log(item);
-    
+    const quantity = this.listProductMetas.find(x => x.key === "Số lượng còn trong kho")?.content;
+    if(quantity){
+      if(item.count > parseInt(quantity)){
+        this.nzMessage.error('Số lượng nhập phải bé hơn số lượng còn trong kho ',quantity);
+        return;
+      }
+    }
     this.cartCusService.addToCart(item, this.snapshot.url);
   }
   createFbSdk() {
