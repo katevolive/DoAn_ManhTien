@@ -253,12 +253,11 @@ namespace Infrastructure.Persistence.Businesses.Account
                     htmlBody.Append("<p>Xin chào <b>" + userModel.Name + "</b>,</p>");
                     htmlBody.Append("<p>Bạn đã lấy lại mật khẩu thành công. Bạn hãy truy cập vào trang web để thay đổi mật khẩu.</p>");
                     htmlBody.Append("<p>Mật khẩu mới của bạn là: <b>" + newPassword + "</b></p>");
-                    htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa-laptop'></span> <p>Molla<strong> Mobile</strong> <span>Thế giới máy tính</span></p></a></p>");
+                    htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa-laptop'></span> <p>Mạnh<strong> Shop</strong> <span>Thế giới máy tính</span></p></a></p>");
                     htmlBody.Append("</body></html>");
 
                     var emailModel = new EmailRequest()
                     {
-                        From = "chuyenvienguimail@gmail.com",
                         To = userModel.Email,
                         Subject = title,
                         Body = htmlBody.ToString()
@@ -266,6 +265,7 @@ namespace Infrastructure.Persistence.Businesses.Account
 
                     try
                     {
+                     
                         await _emailService.SendAsync(emailModel);
                     }
                     catch (Exception ex)
@@ -330,8 +330,8 @@ namespace Infrastructure.Persistence.Businesses.Account
                     StringBuilder htmlBody = new StringBuilder();
                     htmlBody.Append("<html><body>");
                     htmlBody.Append("<p>Xin chào <b>" + entity.Name + "</b>,</p>");
-                    htmlBody.Append("<p>Bạn đã đăng ký tài khoản thành công. Hãy tiếp tục ghé thăm Molla Mobile để chọn lựa cho mình những sản phẩm ưu đãi nhất.</p>");
-                    htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa - laptop'></span> <p>Molla<strong> Mobile</strong> <span>Thế giới điện tử<span></p> </a> </p>");
+                    htmlBody.Append("<p>Bạn đã đăng ký tài khoản thành công. Hãy tiếp tục ghé thăm Mạnh Shop để chọn lựa cho mình những sản phẩm ưu đãi nhất.</p>");
+                    htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa - laptop'></span> <p>Mạnh<strong> Shop</strong> <span>Cửa hàng<span></p> </a> </p>");
                     htmlBody.Append("</body></html>");
 
                     var emailModel = new EmailRequest()

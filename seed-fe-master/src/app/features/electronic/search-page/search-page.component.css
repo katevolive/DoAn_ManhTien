@@ -4,3 +4,6 @@
 .label-custom-control:hover{
     background-color: #F5F5F5;
 }
+.height-300{
+    height:300px !important
+}

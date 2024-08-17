@@ -87,8 +87,8 @@ namespace Infrastructure.Persistence.Businesses.Order
                 htmlBody.Append("</table >");
                 htmlBody.Append("Tổng tiền: " + $"{model.GrandTotal:#,##0.00đ;(#,##0.00đ);Zero}");
                 htmlBody.Append(
-                    "<br>Hãy tiếp tục ghé thăm Molla Mobile để chọn lựa cho mình những sản phẩm ưu đãi nhất.");
-                htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa - phone'></span> <p>Molla<strong> Mobile</strong> <span>Thế giới điện tử<span></p> </a> </p>");
+                    "<br>Hãy tiếp tục ghé thăm Mạnh Shop để chọn lựa cho mình những sản phẩm ưu đãi nhất.");
+                htmlBody.Append("<p><a href='" + _frontendUrl + "'><span class='fas fa - phone'></span> <p>Mạnh<strong> Shop</strong> <span>Cửa hàng<span></p> </a> </p>");
                 htmlBody.Append("</body></html>");
 
                 var emailModel = new EmailRequest()

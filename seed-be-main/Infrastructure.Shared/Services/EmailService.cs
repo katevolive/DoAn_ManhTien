@@ -1,6 +1,7 @@
 ﻿using Domain.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
@@ -22,22 +23,29 @@ namespace Infrastructure.Shared.Services
             try
             {
                 // create message
-                var email = new MailMessage();
-                email.To.Add(request.To);
-                email.From = new MailAddress(MailSettings.EmailFrom);
-                email.Subject = request.Subject;
-                email.Body = request.Body;
-                email.IsBodyHtml = true;
-                using var smtp = new SmtpClient(MailSettings.SmtpHost, MailSettings.SmtpPort);
-                smtp.UseDefaultCredentials = false;
-                smtp.EnableSsl = true;
-                smtp.Credentials = new System.Net.NetworkCredential(MailSettings.SmtpUser, MailSettings.SmtpPass);
-                smtp.Send(email);
+                var email = new MailMessage
+                {
+                    To = { request.To },
+                    From = new MailAddress(MailSettings.EmailFrom),
+                    Subject = request.Subject,
+                    Body = request.Body,
+                    IsBodyHtml = true
+                };
+
+                using var smtp = new SmtpClient(MailSettings.SmtpHost, MailSettings.SmtpPort)
+                {
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential(MailSettings.SmtpUser, MailSettings.SmtpPass),
+                    EnableSsl = true,
+                };
+
+                await smtp.SendMailAsync(email);
             }
             catch (System.Exception ex)
             {
                 Logger.LogError(ex.Message, ex);
             }
         }
+
     }
 }

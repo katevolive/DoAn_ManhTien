@@ -65,7 +65,7 @@ export class CheckoutComponent implements OnInit {
           purchase_units: [
             {
               payee: {
-                email_address: 'nguoiban2022@gmail.com',
+                email_address: 'nguyentienmanh5517@gmail.com',
                 merchant_id: 'Z766WMP2J2SYA',
               },
 
